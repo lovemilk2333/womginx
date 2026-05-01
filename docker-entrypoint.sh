@@ -11,6 +11,10 @@ elif [ ! -z "$SAFE_BROWSING" ]; then
     sed -i "s/1.1.1.1/1.1.1.3/" /etc/nginx/nginx.conf
 fi
 
+if [ ! -z "$USER_AGENT" ]; then
+    sed -i "s|proxy_set_header User-Agent \$http_user_agent|proxy_set_header User-Agent \"$USER_AGENT\"|" /etc/nginx/nginx.conf
+fi
+
 
 # default.conf makes docker listen to 80, and
 # heroku's non-root user running this won't like it at all
